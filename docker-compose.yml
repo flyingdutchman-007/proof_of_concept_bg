@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  app1:
+    build: ./storage-engine
+    networks:
+      my-network:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "5006:5006"
+
+  app2:
+    build: ./calc-engine
+    networks:
+      my-network:
+        ipv4_address: 172.20.0.3
+    ports:
+      - "5015:5015"
+
+  app3:
+    build: ./graphql
+    networks:
+      my-network:
+        ipv4_address: 172.20.0.4
+    ports:
+      - "5010:5010"
+
+  app4:
+    build: ./dash-fe
+    networks:
+      my-network:
+        ipv4_address: 172.20.0.5
+    ports:
+      - "8050:8050"
+
+networks:
+  my-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
