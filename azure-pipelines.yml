@@ -17,7 +17,7 @@ variables:
   dockerfilePathFe: '$(Build.SourcesDirectory)/dash-fe/Dockerfile'
   dockerfilePathGr: '$(Build.SourcesDirectory)/graphql/Dockerfile'
   dockerfilePathSe: '$(Build.SourcesDirectory)/graphql/Dockerfile'
-  tag: '$(Build.BuildId)_$(FormatDateTime('yyyyMMdd-HHmmss', getdate()))'
+  tag: '$(Build.BuildNumber)'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
