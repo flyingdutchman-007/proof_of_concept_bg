@@ -17,7 +17,10 @@ variables:
   dockerfilePathFe: '$(Build.SourcesDirectory)/dash-fe/Dockerfile'
   dockerfilePathGr: '$(Build.SourcesDirectory)/graphql/Dockerfile'
   dockerfilePathSe: '$(Build.SourcesDirectory)/graphql/Dockerfile'
-  tag: '$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-$(component)'
+  tagCa: '$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-Ca'
+  tagFe: '$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-Fe'
+  tagGr: '$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-Gr'
+  tagSe: '$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-Se'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -26,67 +29,55 @@ stages:
 - stage: Build
   displayName: Build and push stage
   jobs:
-  - job: Build
-    displayName: Build
+  - job: BuildAndPushCa
+    displayName: Build and push calc-engine
     pool: mycomputeragent
-    variables:
-      component: 'Ca'
     steps:
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and push calc-engine image to container registry
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
         dockerfile: $(dockerfilePathCa)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag)
-    - script: echo "The $(component) component has been built."
-    - job: Build
-      displayName: Build
-      pool: mycomputeragent
-      variables:
-        component: 'Fe'
-      steps:
-      - task: Docker@2
-        displayName: Build and push an image to container registry
-        inputs:
-          command: buildAndPush
-          repository: $(imageRepository)
-          dockerfile: $(dockerfilePathFe)
-          containerRegistry: $(dockerRegistryServiceConnection)
-          tags: |
-            $(tag)
-      - script: echo "The $(component) component has been built."
-    - job: Build
-      displayName: Build
-      pool: mycomputeragent
-      variables:
-        component: 'Gr'
-      steps:
-      - task: Docker@2
-        displayName: Build and push an image to container registry
-        inputs:
-          command: buildAndPush
-          repository: $(imageRepository)
-          dockerfile: $(dockerfilePathGr)
-          containerRegistry: $(dockerRegistryServiceConnection)
-          tags: |
-            $(tag)
-      - script: echo "The $(component) component has been built."
-    - job: Build
-      displayName: Build
-      pool: mycomputeragent
-      variables:
-        component: 'Se'
-      steps:
-      - task: Docker@2
-        displayName: Build and push an image to container registry
-        inputs:
-          command: buildAndPush
-          repository: $(imageRepository)
-          dockerfile: $(dockerfilePathSe)
-          containerRegistry: $(dockerRegistryServiceConnection)
-          tags: |
-            $(tag)
-      - script: echo "The $(component) component has been built."
+          $(tagCa)
+  - job: BuildAndPushFe
+    displayName: Build and push dash-fe
+    pool: mycomputeragent
+    steps:
+    - task: Docker@2
+      displayName: Build and push dash-fe image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePathFe)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tagFe)
+  - job: BuildAndPushGr
+    displayName: Build and push graphql
+    pool: mycomputeragent
+    steps:
+    - task: Docker@2
+      displayName: Build and push graphql image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePathGr)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tagGr)
+  - job: BuildAndPushSe
+    displayName: Build and push selenium
+    pool: mycomputeragent
+    steps:
+    - task: Docker@2
+      displayName: Build and push selenium image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePathSe)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tagSe)
