@@ -6,6 +6,7 @@ spec:
   selector:
     matchLabels:
       app: myapp
+  progressDeadlineSeconds: 1200
   replicas: 1
   strategy:
     type: RollingUpdate
