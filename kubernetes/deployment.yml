@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: selenium
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-selenium
+          ports:
+            - containerPort: 4444
+        - name: calc-engine
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-calc-engine
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 60
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 5
+        - name: graphql
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-graphql
+          ports:
+            - containerPort: 4000
+        - name: dash-fe
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-dash-fe
+          ports:
+            - containerPort: 8050
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8050
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8050
+            initialDelaySeconds: 5
+            periodSeconds: 60
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 5
+      dependencies:
+        - type: "rollingUpdate"
+          name: "selenium"
+        - type: "rollingUpdate"
+          name: "calc-engine"
+          condition: "selenium"
+        - type: "rollingUpdate"
+          name: "graphql"
+          condition: "calc-engine"
+        - type: "rollingUpdate"
+          name: "dash-fe"
+          condition: "graphql"

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dash-app
+spec:
+  selector:
+    app: dash-fe
+  ports:
+    - protocol: TCP
+      port: 8050
+      targetPort: 8050
+  type: LoadBalancer
