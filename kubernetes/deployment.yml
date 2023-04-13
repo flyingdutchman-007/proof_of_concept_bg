@@ -70,15 +70,3 @@ spec:
             timeoutSeconds: 1
             successThreshold: 1
             failureThreshold: 5
-      dependencies:
-        - type: "rollingUpdate"
-          name: "selenium"
-        - type: "rollingUpdate"
-          name: "calc-engine"
-          condition: "selenium"
-        - type: "rollingUpdate"
-          name: "graphql"
-          condition: "calc-engine"
-        - type: "rollingUpdate"
-          name: "dash-fe"
-          condition: "graphql"
