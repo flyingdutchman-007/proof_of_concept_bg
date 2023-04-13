@@ -17,7 +17,7 @@ variables:
   dockerfilePathFe: '$(Build.SourcesDirectory)/dash-fe/Dockerfile'
   dockerfilePathGr: '$(Build.SourcesDirectory)/graphql/Dockerfile'
   dockerfilePathSe: '$(Build.SourcesDirectory)/graphql/Dockerfile'
-  tag: '$(Build.BuildNumber)'
+  tag: '$(Build.BuildId)-$(System.TeamProject)-$(Build.SourceBranchName)-$(component)'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -29,6 +29,8 @@ stages:
   - job: Build
     displayName: Build
     pool: mycomputeragent
+    variables:
+      component: 'Ca'
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -39,30 +41,52 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePathFe)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePathGr)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePathSe)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+    - script: echo "The $(component) component has been built."
+    - job: Build
+      displayName: Build
+      pool: mycomputeragent
+      variables:
+        component: 'Fe'
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush
+          repository: $(imageRepository)
+          dockerfile: $(dockerfilePathFe)
+          containerRegistry: $(dockerRegistryServiceConnection)
+          tags: |
+            $(tag)
+      - script: echo "The $(component) component has been built."
+    - job: Build
+      displayName: Build
+      pool: mycomputeragent
+      variables:
+        component: 'Gr'
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush
+          repository: $(imageRepository)
+          dockerfile: $(dockerfilePathGr)
+          containerRegistry: $(dockerRegistryServiceConnection)
+          tags: |
+            $(tag)
+      - script: echo "The $(component) component has been built."
+    - job: Build
+      displayName: Build
+      pool: mycomputeragent
+      variables:
+        component: 'Se'
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush
+          repository: $(imageRepository)
+          dockerfile: $(dockerfilePathSe)
+          containerRegistry: $(dockerRegistryServiceConnection)
+          tags: |
+            $(tag)
+      - script: echo "The $(component) component has been built."
