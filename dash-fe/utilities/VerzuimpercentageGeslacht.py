@@ -17,7 +17,7 @@ class Dashboard3:
 
     def query_data(self, query):
         try:
-            response = requests.post('http://172.20.0.4:5010/graphql', json={'query': query})
+            response = requests.post('http://graphql:4000/graphql', json={'query': query})
             response.raise_for_status()
             data = response.json()
             data = data['data']['VerzuimPercentageGeslachtQuery'][0]

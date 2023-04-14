@@ -17,24 +17,24 @@ class FoodType:
 
 @strawberry.type
 class VerzuimVenster:
-    Naam: list[str]
-    Verzuimpercentage: list[float]
-    GemiddeldeMeldingsfrequentie: list[float]
-    label: list[str]
+    Naam: List[str]
+    Verzuimpercentage: List[float]
+    GemiddeldeMeldingsfrequentie: List[float]
+    label: List[str]
     verzuimfreqVenster: float
     verzuimpercVenster: float
 
 @strawberry.type
 class VerzuimPercentage:
-    TypeDienstverband: list[str]
-    Jaar: list[str]
-    Verzuimpercentage: list[float]
+    TypeDienstverband: List[str]
+    Jaar: List[str]
+    Verzuimpercentage: List[float]
     
 @strawberry.type
 class VerzuimPercentageGeslacht:
-    Geslacht: list[str]
-    TypeDienstverband: list[str]
-    Verzuimpercentage: list[float]
+    Geslacht: List[str]
+    TypeDienstverband: List[str]
+    Verzuimpercentage: List[float]
 
 @strawberry.input
 class AddCalcFoodInput:
@@ -61,7 +61,7 @@ class Query:
    
     @strawberry.field
     def VerzuimPercentageGeslachtQuery(self) -> List[VerzuimPercentageGeslacht]:
-        response = requests.get('http://172.20.0.3:5015/verzuimpercentagegeslacht')
+        response = requests.get('http://calc-service:8080/verzuimpercentagegeslacht')
         if response.status_code == 200:
             data = response.json()
         else:
@@ -78,7 +78,7 @@ class Query:
     
     @strawberry.field
     def VerzuimPercentageQuery(self) -> List[VerzuimPercentage]:
-        response = requests.get('http://172.20.0.3:5015/verzuimpercentage')
+        response = requests.get('http://calc-service:8080/verzuimpercentage')
         if response.status_code == 200:
             data = response.json()
         else:
@@ -94,7 +94,7 @@ class Query:
     
     @strawberry.field
     def VerzuimVensterQuery(self) -> List[VerzuimVenster]:
-        response = requests.get('http://172.20.0.3:5015/verzuimvenster')
+        response = requests.get('http://calc-service:8080/verzuimvenster')
         if response.status_code == 200:
             data = response.json()
         else:
