@@ -20,11 +20,11 @@ spec:
     spec:
       containers:
         - name: selenium
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:94-webapp-main-Se
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:96-webapp-main-Se
           ports:
             - containerPort: 4444
         - name: calc-engine
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:94-webapp-main-Ca
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:96-webapp-main-Ca
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -46,11 +46,11 @@ spec:
             successThreshold: 1
             failureThreshold: 5
         - name: graphql
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:94-webapp-main-Gr
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:96-webapp-main-Gr
           ports:
             - containerPort: 4000
         - name: dash-fe
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:94-webapp-main-Fe
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:96-webapp-main-Fe
           ports:
             - containerPort: 8050
           readinessProbe:
