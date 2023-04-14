@@ -19,14 +19,14 @@ spec:
         app: myapp
     spec:
       containers:
-        - name: selenium
+        - name: storage-engine
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-Se
           ports:
-            - containerPort: 4444
+            - containerPort: 5006
         - name: calc-engine
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-Ca
           ports:
-            - containerPort: 8080
+            - containerPort: 5015
           readinessProbe:
             httpGet:
               path: /healthz
@@ -48,7 +48,7 @@ spec:
         - name: graphql
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-Gr
           ports:
-            - containerPort: 4000
+            - containerPort: 5010
         - name: dash-fe
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-Fe
           ports:
