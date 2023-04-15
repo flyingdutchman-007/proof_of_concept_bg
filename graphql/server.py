@@ -17,4 +17,4 @@ server.add_url_rule(
 
 #Run the server
 if __name__ == '__main__':
-    server.run(debug=True, host='0.0.0.0', port=5010,threaded=True)
+    server.run(debug=True, host='0.0.0.0', port=5020,threaded=True)
