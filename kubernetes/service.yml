@@ -23,6 +23,7 @@ spec:
     - name: http
       port: 5020
       targetPort: 5020
+  type: LoadBalancer
 
 ---
 apiVersion: v1
