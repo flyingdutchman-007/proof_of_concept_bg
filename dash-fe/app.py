@@ -3,7 +3,7 @@ from dash import html
 from dash import callback
 from dash import Input, Output
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
+from dash import dcc
 
 
 from utilities.VerzuimVenster import Dashboard
@@ -60,14 +60,10 @@ dashboard3 = dashboard3.create_dashoard()
 
 
 
-app = Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
-
-
-
+app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 # App layout
 app.layout = html.Div(
     [
-        navbar,
         html.Div(
             [
                 html.H2("Dashboard 1"),
