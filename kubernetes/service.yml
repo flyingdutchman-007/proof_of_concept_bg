@@ -9,21 +9,24 @@ spec:
     - name: http
       port: 8050
       targetPort: 8050
+    - name: http-1
+      port: 5020
+      targetPort: 5020
+
   type: LoadBalancer
 
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: graphql-service
-spec:
-  selector:
-    app: graphql
-  ports:
-    - name: http
-      port: 5020
-      targetPort: 5020
-  type: LoadBalancer
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: graphql-service
+# spec:
+#   selector:
+#     app: graphql
+#   ports:
+#     - name: http
+#       port: 5020
+#       targetPort: 5020
 
 ---
 apiVersion: v1
