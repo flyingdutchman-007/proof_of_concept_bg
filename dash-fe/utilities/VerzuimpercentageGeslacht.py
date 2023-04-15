@@ -46,38 +46,31 @@ class Dashboard3:
             raise
         
             
-    def plot_verzuimpercentage_vs_gemMeldingsfrequentie(self, data, kleur_emc):
-            
-        try:    
-            df_verzuimpercentage_naar_geslacht  = pd.DataFrame(data)
-            fig = px.bar(df_verzuimpercentage_naar_geslacht, x="TypeDienstverband", y="Verzuimpercentage", color="Geslacht", barmode="group", text_auto='.2%', color_discrete_sequence=kleur_emc)
-            fig.update_traces(textfont_size=36, textangle=0, textposition="outside", cliponaxis=False)
-            fig.update_layout(
-            font_size = 36,
-            font_family="Times",
-            font_color="black",
-            title_font_family="Times",
-            title_font_color="black",
-            legend_title_font_color="black",
-            yaxis_tickformat = '.0%' 
-            )
+    def plot_verzuimpercentage_vs_gemMeldingsfrequentie(self, data, kleur_emc): 
+        df_verzuimpercentage_naar_geslacht  = pd.DataFrame(data)
+        fig = px.bar(df_verzuimpercentage_naar_geslacht, x="TypeDienstverband", y="Verzuimpercentage", color="Geslacht", barmode="group", text_auto='.2%', color_discrete_sequence=kleur_emc)
+        fig.update_traces(textfont_size=36, textangle=0, textposition="outside", cliponaxis=False)
+        fig.update_layout(
+        font_size = 36,
+        font_family="Times",
+        font_color="black",
+        title_font_family="Times",
+        title_font_color="black",
+        legend_title_font_color="black",
+        yaxis_tickformat = '.0%' 
+        )
 
-            return fig
-        except:
-            return "error" 
+        return fig
 
 
     def create_dashoard(self):
-        try:
-            data = self.query_data(self.query)
+        data = self.query_data(self.query)
+        
+        fig = self.plot_verzuimpercentage_vs_gemMeldingsfrequentie(data, self.kleur_emc)
             
-            fig = self.plot_verzuimpercentage_vs_gemMeldingsfrequentie(data, self.kleur_emc)
-                
-            return html.Div([
-                dcc.Graph(id='graph', figure=fig)
-                ])
-        except:
-            return "error"
+        return html.Div([
+            dcc.Graph(id='graph', figure=fig)
+            ])
 
 
 

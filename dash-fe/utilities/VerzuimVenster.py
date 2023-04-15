@@ -49,77 +49,73 @@ class Dashboard:
             logging.error(f"Request failed: {e}")
             raise
             
-    def plot_verzuimpercentage_vs_gemMeldingsfrequentie(self, data, kleur_emc):
-        try:      
-            verzuimfreqVenster = data.pop('verzuimfreqVenster')
-            verzuimpercVenster = data.pop('verzuimpercVenster')
-            df_verzuimpercentage_vs_gemMeldingsfrequentie  = pd.DataFrame(data)
-            
-            fig = px.scatter(
-            df_verzuimpercentage_vs_gemMeldingsfrequentie, 
-            x="Verzuimpercentage", 
-            y="GemiddeldeMeldingsfrequentie", 
-            color="Naam", 
-            title="Verzuimvenster",
-            text="label",
-            color_discrete_sequence=kleur_emc
-        )
-            fig.update_layout(
-                font_size = 14,
-                font_family="Times",
-                font_color="black",
-                title_font_family="Times",
-                title_font_color="black",
-                legend_title_font_color="black"
-            )
-            max_x=24
-            min_x=6
-            max_y=3.4
-            min_y=1
-            
-            fig.add_shape(
-                type="rect",
-                x0=min_x, y0=min_y,
-                x1=verzuimpercVenster, y1=verzuimfreqVenster,
-                fillcolor="green",opacity=0.25, line_width=0
-            )
-            fig.add_shape(
-                type="rect",
-                x0=min_x, y0=verzuimfreqVenster,
-                x1=verzuimpercVenster, y1=max_y,
-                fillcolor="yellow",opacity=0.25, line_width=0
-            )
-            fig.add_shape(
-                type="rect",
-                x0=verzuimpercVenster, y0=verzuimfreqVenster,
-                x1=max_x, y1=max_y,
-                fillcolor="red",opacity=0.25, line_width=0
-            )
-            fig.add_shape(
-                type="rect",
-                x0=verzuimpercVenster, y0=min_y,
-                x1=max_x, y1=verzuimfreqVenster,
-                fillcolor="orange",opacity=0.25, line_width=0
-            )
-            fig.add_trace(go.Scatter(
-                x=[7, 7, 19, 19],
-                y=[1.1, 3.2, 3.2, 1.1],
-                text=["Laag verzuim probleem",
-                    "Kort verzuim probleem",
-                    "Dubbel verzuim probleem",
-                    "Lang verzuim probleem"],
-                mode="text",
-            ))  
-            fig.update_yaxes(range = [min_y,max_y])
-            fig.update_xaxes(range = [min_x,max_x])
-            fig.update_traces(marker={'size': 25}, textposition='top center', marker_opacity=1,selector=dict(type='scatter'))
-            fig.update_layout(showlegend=False)
-
-            return fig 
-            
-        except:
-            return 'error'
+    def plot_verzuimpercentage_vs_gemMeldingsfrequentie(self, data, kleur_emc):   
+        verzuimfreqVenster = data.pop('verzuimfreqVenster')
+        verzuimpercVenster = data.pop('verzuimpercVenster')
+        df_verzuimpercentage_vs_gemMeldingsfrequentie  = pd.DataFrame(data)
         
+        fig = px.scatter(
+        df_verzuimpercentage_vs_gemMeldingsfrequentie, 
+        x="Verzuimpercentage", 
+        y="GemiddeldeMeldingsfrequentie", 
+        color="Naam", 
+        title="Verzuimvenster",
+        text="label",
+        color_discrete_sequence=kleur_emc
+    )
+        fig.update_layout(
+            font_size = 14,
+            font_family="Times",
+            font_color="black",
+            title_font_family="Times",
+            title_font_color="black",
+            legend_title_font_color="black"
+        )
+        max_x=24
+        min_x=6
+        max_y=3.4
+        min_y=1
+        
+        fig.add_shape(
+            type="rect",
+            x0=min_x, y0=min_y,
+            x1=verzuimpercVenster, y1=verzuimfreqVenster,
+            fillcolor="green",opacity=0.25, line_width=0
+        )
+        fig.add_shape(
+            type="rect",
+            x0=min_x, y0=verzuimfreqVenster,
+            x1=verzuimpercVenster, y1=max_y,
+            fillcolor="yellow",opacity=0.25, line_width=0
+        )
+        fig.add_shape(
+            type="rect",
+            x0=verzuimpercVenster, y0=verzuimfreqVenster,
+            x1=max_x, y1=max_y,
+            fillcolor="red",opacity=0.25, line_width=0
+        )
+        fig.add_shape(
+            type="rect",
+            x0=verzuimpercVenster, y0=min_y,
+            x1=max_x, y1=verzuimfreqVenster,
+            fillcolor="orange",opacity=0.25, line_width=0
+        )
+        fig.add_trace(go.Scatter(
+            x=[7, 7, 19, 19],
+            y=[1.1, 3.2, 3.2, 1.1],
+            text=["Laag verzuim probleem",
+                "Kort verzuim probleem",
+                "Dubbel verzuim probleem",
+                "Lang verzuim probleem"],
+            mode="text",
+        ))  
+        fig.update_yaxes(range = [min_y,max_y])
+        fig.update_xaxes(range = [min_x,max_x])
+        fig.update_traces(marker={'size': 25}, textposition='top center', marker_opacity=1,selector=dict(type='scatter'))
+        fig.update_layout(showlegend=False)
+
+        return fig 
+            
     
 
 
