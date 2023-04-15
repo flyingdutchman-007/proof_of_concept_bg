@@ -67,7 +67,7 @@ app.layout = html.Div(
         html.Div(
             [
                 html.H2("Dashboard 1"),
-                dashboard1,
+                dashboard,
             ],
             style={"padding": "20px"},
         ),
