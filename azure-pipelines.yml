@@ -17,10 +17,10 @@ variables:
   dockerfilePathFe: '$(Build.SourcesDirectory)/dash-fe/Dockerfile'
   dockerfilePathGr: '$(Build.SourcesDirectory)/graphql/Dockerfile'
   dockerfilePathSe: '$(Build.SourcesDirectory)/storage-engine/Dockerfile'
-  tagCa: '97-$(System.TeamProject)-$(Build.SourceBranchName)-ca'
-  tagFe: '97-$(System.TeamProject)-$(Build.SourceBranchName)-fe'
-  tagGr: '97-$(System.TeamProject)-$(Build.SourceBranchName)-gr'
-  tagSe: '97-$(System.TeamProject)-$(Build.SourceBranchName)-se'
+  tagCa: '98-$(System.TeamProject)-$(Build.SourceBranchName)-ca'
+  tagFe: '98-$(System.TeamProject)-$(Build.SourceBranchName)-fe'
+  tagGr: '98-$(System.TeamProject)-$(Build.SourceBranchName)-gr'
+  tagSe: '98-$(System.TeamProject)-$(Build.SourceBranchName)-se'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
