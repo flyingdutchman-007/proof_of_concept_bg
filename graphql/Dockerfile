@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 RUN apt-get update && apt-get install -y python3-tk
 
 # Expose port 5015 for the Flask app to listen on
-EXPOSE 5010
+EXPOSE 5020
 
 # Define environment variable
 ENV NAME World
