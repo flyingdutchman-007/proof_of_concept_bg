@@ -8,6 +8,11 @@ from dash import html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 import plotly.io as pio
+import logging
+import requests
+from requests.exceptions import RequestException, HTTPError
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 class Dashboard:
     def __init__(self,query,kleur_emc):
@@ -16,21 +21,33 @@ class Dashboard:
         
 
     def query_data(self, query):
+        url = 'localhost:5020/graphql'
+        retry_strategy = Retry(
+            total=3,
+            backoff_factor=40,
+            status_forcelist=[500, 502, 503, 504],
+            method_whitelist=["POST"]
+        )
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        http = requests.Session()
+        http.mount("https://", adapter)
+        http.mount("http://", adapter)
+
         try:
-            response = requests.post('localhost:5020/graphql', json={'query': query})
+            response = http.post(url, json={'query': query})
             response.raise_for_status()
             data = response.json()
-            data = data['data']['VerzuimVensterQuery'][0]
-            
+            data = data['data']['VerzuimPercentageGeslachtQuery'][0]
+
             return data
 
-        except requests.exceptions.HTTPError as err:
-            data = {'Naam': ['WVS', '1e Kwartiel'], 'Verzuimpercentage': [16.20025445292621, 14.838207128456654], 'GemiddeldeMeldingsfrequentie': [1.8223969465648853, 1.7360879993093987], 'label': ['WVS, 16.2%, 1.82', '1e Kwartiel, 14.8%, 1.74'], 'verzuimfreqVenster': 2.0106678147722925, 'verzuimpercVenster': 15.606863120295955}
-            return data
-        
-        except requests.exceptions.RequestException as err:
-            data = {'Naam': ['WVS', '1e Kwartiel'], 'Verzuimpercentage': [16.20025445292621, 14.838207128456654], 'GemiddeldeMeldingsfrequentie': [1.8223969465648853, 1.7360879993093987], 'label': ['WVS, 16.2%, 1.82', '1e Kwartiel, 14.8%, 1.74'], 'verzuimfreqVenster': 2.0106678147722925, 'verzuimpercVenster': 15.606863120295955}
-            return data
+        except HTTPError as e:
+            logging.error(f"HTTP error occurred: {e}")
+            raise
+
+        except RequestException as e:
+            logging.error(f"Request failed: {e}")
+            raise
             
     def plot_verzuimpercentage_vs_gemMeldingsfrequentie(self, data, kleur_emc):
         try:      

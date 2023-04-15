@@ -16,19 +16,34 @@ class Dashboard3:
         
 
     def query_data(self, query):
+
+        url = 'localhost:5020/graphql'
+        retry_strategy = Retry(
+            total=3,
+            backoff_factor=40,
+            status_forcelist=[500, 502, 503, 504],
+            method_whitelist=["POST"]
+        )
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        http = requests.Session()
+        http.mount("https://", adapter)
+        http.mount("http://", adapter)
+
         try:
-            response = requests.post('localhost:5020/graphql', json={'query': query})
+            response = http.post(url, json={'query': query})
             response.raise_for_status()
             data = response.json()
             data = data['data']['VerzuimPercentageGeslachtQuery'][0]
 
             return data
 
-        except requests.exceptions.HTTPError as err:
-            return f"Error during API request: {err}"
-            
-        except requests.exceptions.RequestException as err:
-            return f"Something went wrong: {err}"
+        except HTTPError as e:
+            logging.error(f"HTTP error occurred: {e}")
+            raise
+
+        except RequestException as e:
+            logging.error(f"Request failed: {e}")
+            raise
         
             
     def plot_verzuimpercentage_vs_gemMeldingsfrequentie(self, data, kleur_emc):

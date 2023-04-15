@@ -21,8 +21,6 @@ spec:
       containers:
         - name: storage-engine
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-se
-          ports:
-            - containerPort: 5006
           # readinessProbe:
           #   httpGet:
           #     path: /healthz
@@ -46,8 +44,6 @@ spec:
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-ca
           ports:
             - containerPort: 5015
-          dependsOn:
-          - name: storage-engine
           # readinessProbe:
           #   httpGet:
           #     path: /healthz
@@ -71,8 +67,6 @@ spec:
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-gr
           ports:
             - containerPort: 5020
-          dependsOn:
-          - name: calc-engine
           # readinessProbe:
           #   httpGet:
           #     path: /healthz
@@ -96,8 +90,6 @@ spec:
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-fe
           ports:
             - containerPort: 8050
-          dependsOn:
-          - name: graphql          
           # readinessProbe:
           #   httpGet:
           #     path: /healthz
