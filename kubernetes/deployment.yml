@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: storage-engine
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-Se
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-se
           ports:
             - containerPort: 5006
           readinessProbe:
@@ -41,9 +41,9 @@ spec:
             timeoutSeconds: 1
             successThreshold: 1
             failureThreshold: 5
-            
+
         - name: calc-engine
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-Ca
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-ca
           ports:
             - containerPort: 5015
           readinessProbe:
@@ -66,7 +66,7 @@ spec:
             failureThreshold: 5
 
         - name: graphql
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-Gr
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-gr
           ports:
             - containerPort: 5020
           readinessProbe:
@@ -89,7 +89,7 @@ spec:
             failureThreshold: 5
 
         - name: dash-fe
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-Fe
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-fe
           ports:
             - containerPort: 8050
           readinessProbe:
