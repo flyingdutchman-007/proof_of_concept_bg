@@ -20,4 +20,4 @@ EXPOSE 5020
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "server.py"]
+CMD ["python", "server.py","--port", "5020"]

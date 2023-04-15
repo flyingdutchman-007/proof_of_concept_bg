@@ -20,4 +20,4 @@ EXPOSE 5015
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "run.py"]
+CMD ["python", "run.py","--port", "5015"]

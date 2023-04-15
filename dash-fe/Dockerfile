@@ -20,4 +20,4 @@ EXPOSE 8050
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD ["python", "app.py","--port", "8050"]
