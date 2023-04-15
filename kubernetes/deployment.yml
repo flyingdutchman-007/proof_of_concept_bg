@@ -23,90 +23,90 @@ spec:
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-se
           ports:
             - containerPort: 5006
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 60
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 60
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 5
 
         - name: calc-engine
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-ca
           ports:
             - containerPort: 5015
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 60
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 60
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 5
 
         - name: graphql
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-gr
           ports:
             - containerPort: 5020
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 60
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 60
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 5
 
         - name: dash-fe
           image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:97-webapp-main-fe
           ports:
             - containerPort: 8050
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8050
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8050
-            initialDelaySeconds: 5
-            periodSeconds: 60
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8050
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8050
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 60
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 5
