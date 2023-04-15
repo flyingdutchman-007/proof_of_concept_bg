@@ -1,8 +1,9 @@
-import dash_mantine_components as dmc
 from dash import Dash
 from dash import html
 from dash import callback
 from dash import Input, Output
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
 
 
 from utilities.VerzuimVenster import Dashboard
@@ -59,36 +60,38 @@ dashboard3 = dashboard3.create_dashoard()
 
 
 
-app = Dash(__name__)
+app = Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 
 
-app.layout = html.Div(children=[
-    dmc.Tabs(
-                [
-                    dmc.TabsList(
-                        [
-                            dmc.Tab("Verzuimvenster", value="1"),
-                            dmc.Tab("Verzuimpercentage", value="2"),
-                            dmc.Tab("Verzuimpercentage Geslacht", value="3"),
-                        ]
-                    ),
-                ],
-                id="tabs-example",
-                value="1",
-            ),
-            html.Div(id="tabs-content", style={"paddingTop": 10}),
-        ]
-    )
+# App layout
+app.layout = html.Div(
+    [
+        navbar,
+        html.Div(
+            [
+                html.H2("Dashboard 1"),
+                dashboard1,
+            ],
+            style={"padding": "20px"},
+        ),
+        html.Div(
+            [
+                html.H2("Dashboard 2"),
+                dashboard2,
+            ],
+            style={"padding": "20px"},
+        ),
+        html.Div(
+            [
+                html.H2("Dashboard 3"),
+                dashboard3,
+            ],
+            style={"padding": "20px"},
+        ),
+    ]
+)
 
-@callback(Output("tabs-content", "children"), Input("tabs-example", "value"),suppress_callback_exceptions=True)
-def render_content(active):
-    if active == "1":
-        return [dmc.Text("VerzuimVenster"), dashboard]
-    elif active == '2':
-        return [dmc.Text("Verzuimpercentage"), dashboard2]
-    else: 
-        return [dmc.Text("Verzuimpercentage Per Geslacht"),dashboard3]
 
 
 if __name__ == "__main__":
