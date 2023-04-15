@@ -61,7 +61,7 @@ class Query:
    
     @strawberry.field
     def VerzuimPercentageGeslachtQuery(self) -> List[VerzuimPercentageGeslacht]:
-        response = requests.get('localhost:5015/verzuimpercentagegeslacht')
+        response = requests.get('http://127.0.0.1:5015/verzuimpercentagegeslacht')
         if response.status_code == 200:
             data = response.json()
         else:
@@ -78,7 +78,7 @@ class Query:
     
     @strawberry.field
     def VerzuimPercentageQuery(self) -> List[VerzuimPercentage]:
-        response = requests.get('localhost:5015/verzuimpercentage')
+        response = requests.get('http://127.0.0.1:5015/verzuimpercentage')
         if response.status_code == 200:
             data = response.json()
         else:
@@ -94,7 +94,7 @@ class Query:
     
     @strawberry.field
     def VerzuimVensterQuery(self) -> List[VerzuimVenster]:
-        response = requests.get('localhost:5015/verzuimvenster')
+        response = requests.get('http://127.0.0.1:5015/verzuimvenster')
         if response.status_code == 200:
             data = response.json()
         else:

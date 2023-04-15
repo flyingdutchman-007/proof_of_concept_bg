@@ -90,7 +90,7 @@ app = Flask(__name__)
 #adding a route to the flask server with the url /sum
 @app.route("/verzuimvenster", methods=['GET'])
 def calc():
-    response = requests.get('http://storage-service:9000/query-data')
+    response = requests.get('http://127.0.0.1:5006/query-data')
     if response.status_code == 200:
         data = response.json()
         
@@ -230,7 +230,7 @@ def calc():
 #adding a route to the flask server with the url /sum
 @app.route("/verzuimpercentage", methods=['GET'])
 def verzuimpercentage():
-    response = requests.get('localhost:5006/query-data')
+    response = requests.get('http://127.0.0.1:5006/query-data')
     if response.status_code == 200:
         data = response.json()
         
@@ -610,7 +610,7 @@ def verzuimpercentage():
 @app.route("/verzuimpercentagegeslacht", methods=['GET'])
 def verzuimpercentagegeslacht():
     
-    response = requests.get('localhost:5006/query-data')
+    response = requests.get('http://127.0.0.1:5006/query-data')
     if response.status_code == 200:
         data = response.json()
         
@@ -985,7 +985,7 @@ def verzuimpercentagegeslacht():
 @app.route("/verzuimduur", methods=['GET'])
 def verzuimduur():
     
-    response = requests.get('localhost:5006/query-data')
+    response = requests.get('http://127.0.0.1:5006/query-data')
     if response.status_code == 200:
         data = response.json()
         

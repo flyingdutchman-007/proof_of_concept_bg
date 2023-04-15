@@ -17,7 +17,7 @@ class Dashboard4:
 
     def query_data(self, query):
         
-        url = 'localhost:5020/graphql'
+        url = 'http://127.0.0.1:5020/graphql'
         retry_strategy = Retry(
             total=3,
             backoff_factor=40,
