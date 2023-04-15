@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: storage-engine
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:98-webapp-main-se
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:99-webapp-main-se
           # readinessProbe:
           #   httpGet:
           #     path: /healthz
@@ -41,7 +41,7 @@ spec:
           #   failureThreshold: 5
 
         - name: calc-engine
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:98-webapp-main-ca
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:99-webapp-main-ca
           ports:
             - containerPort: 5015
           # readinessProbe:
@@ -64,7 +64,7 @@ spec:
           #   failureThreshold: 5
 
         - name: graphql
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:98-webapp-main-gr
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:99-webapp-main-gr
           ports:
             - containerPort: 5020
           # readinessProbe:
@@ -87,7 +87,7 @@ spec:
           #   failureThreshold: 5
 
         - name: dash-fe
-          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:98-webapp-main-fe
+          image: myacrwebapp.azurecr.io/flyingdutchmanproofofconceptbg:99-webapp-main-fe
           ports:
             - containerPort: 8050
           # readinessProbe:

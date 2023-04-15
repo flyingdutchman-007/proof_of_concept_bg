@@ -8,6 +8,9 @@ from dash import html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 import plotly.io as pio
+from requests.exceptions import RequestException, HTTPError
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 class Dashboard4:
     def __init__(self,query,kleur_emc,):
