@@ -37,7 +37,7 @@ class Dashboard:
             response = http.post(url, json={'query': query})
             response.raise_for_status()
             data = response.json()
-            data = data['data']['VerzuimPercentageGeslachtQuery'][0]
+            data = data['data']['VerzuimVensterQuery'][0]
 
             return data
 
