@@ -126,7 +126,7 @@ class Dashboard:
             fig = self.plot_verzuimpercentage_vs_gemMeldingsfrequentie(data, self.kleur_emc)
             
             return html.Div([
-                dcc.Graph(id='graph', figure=fig)
+                dcc.Graph(id='graph3', figure=fig)
                 ])
         except:
             return "error"
